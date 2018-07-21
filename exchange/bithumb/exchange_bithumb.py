@@ -1,6 +1,7 @@
 import logging
 from exchange.errors import *
 from exchange.ticker import Ticker
+from exchange.orderbook import *
 from exchange.currency_pair import CurrencyPair
 from exchange.exchange_base import ExchangeBase
 from exchange.bithumb.bithumb import Bithumb
@@ -8,22 +9,19 @@ from exchange.bithumb.bithumb import Bithumb
 
 class ExchangeBithumb(ExchangeBase):
     """
-    빗썸
+    Bithumb
     """
     NAME = 'Bithumb'
     VERSION = '1.0'
     URL = 'https://www.bithumb.com/u1/US127'
 
     def __init__(self):
-        '''
-        생성자
-        '''
         super().__init__(self.NAME, self.VERSION, self.URL)
         self.bithumb = Bithumb()
 
     def get_currency_pairs(self):
         '''
-        지원되는 암호화폐 쌍 리스트
+        Gets currency list supported by exchange
         :return: supported currency pair list
         :rtype: CurrencyPair[]
         '''
@@ -39,9 +37,9 @@ class ExchangeBithumb(ExchangeBase):
 
     def get_ticker(self, currency_pair):
         '''
-        암호화폐쌍의 Ticker 정보 얻기
-        :param CurrencyPair currency_pair: 암호화폐 쌍
-        :return: ticker 정보
+        Gets last price
+        :param CurrencyPair currency_pair: currency pair
+        :return: ticker
         :rtype: Ticker
         '''
         if currency_pair is None:
@@ -54,3 +52,33 @@ class ExchangeBithumb(ExchangeBase):
         price = float(ticker['data']['closing_price'])
         timestamp = int(ticker['data']['date'])
         return Ticker(currency_pair, price, timestamp)
+
+    def get_orderbook(self, currency_pair):
+        '''
+        Gets orderbook information
+        :param CurrencyPair currency_pair: currency pair
+        :return: orderbook
+        :rtype: Orderbook
+        '''
+        if currency_pair is None:
+            raise InvalidParamException('currency_pair is None')
+        if currency_pair.base_currency != 'KRW':
+            raise InvalidParamException('invalid base_currency')
+        orderbook = self.bithumb.orderbook(currency_pair.currency)
+        if int(orderbook['status']) != 0:
+            raise Exception('orderbook() failed(%s)' % orderbook['status'])
+
+        timestamp = orderbook['data']['timestamp']
+        asks = []
+        for unit in orderbook['data']['asks']:
+            price = float(unit['price'])
+            amount = float(unit['quantity'])
+            asks.append(OrderbookItem(price, amount))
+
+        bids = []
+        for unit in orderbook['data']['bids']:
+            price = float(unit['price'])
+            amount = float(unit['quantity'])
+            bids.append(OrderbookItem(price, amount))
+
+        return Orderbook(currency_pair, asks, bids, timestamp)

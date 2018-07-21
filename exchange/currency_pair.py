@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 class CurrencyPair:
     """
-    암호화폐 쌍 클래스
+    Currency pair
     """
 
     def __init__(self, base_currency, currency):
         '''
-        :param str base_currency: 기축 화폐(코인/화폐)
-        :param str currency: 거래 대상 화폐
+        :param str base_currency: base currency
+        :param str currency: target currency
         '''
         self.base_currency = base_currency
         self.currency = currency

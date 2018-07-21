@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 class Ticker:
     """
-    Ticker 정보
+    last traded price
     """
 
     def __init__(self, currency_pair, price, timestamp):
         '''
-        생성자
-        :param CurrencyPair currency_pair: Ticker 정보의 암호화폐 쌍
-        :param float price: 가격
-        :param long timestamp: 업데이트 시간
+        contructor
+        :param CurrencyPair currency_pair: currency pair
+        :param float price: price
+        :param long timestamp: updated time
         '''
         self.currency_pair = currency_pair
         self.price = price

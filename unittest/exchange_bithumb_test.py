@@ -1,15 +1,17 @@
 import unittest
 import logging
-from exchange.currency_pair import CurrencyPair
-from exchange.exchange_api import ExchangeAPI
+from exchange import CurrencyPair
+from exchange import ExchangeAPI
 
 
 class ExchangeBithumbTest(unittest.TestCase):
 
-    def test_get_currency_pairs(self):
+    def get_exchange(self):
         exchange = ExchangeAPI()
-        upbit = exchange.create_exchange('Bithumb')
-        pairs = upbit.get_currency_pairs()
+        return exchange.create_exchange('Bithumb')
+
+    def test_get_currency_pairs(self):
+        pairs = self.get_exchange().get_currency_pairs()
         self.assertIsNotNone(pairs)
         self.assertNotEqual(len(pairs), 0)
         for pair in pairs:
@@ -18,11 +20,14 @@ class ExchangeBithumbTest(unittest.TestCase):
             logging.info(pair)
 
     def test_get_ticker(self):
-        exchange = ExchangeAPI()
-        upbit = exchange.create_exchange('Bithumb')
-        ticker = upbit.get_ticker(CurrencyPair('KRW', 'ICX'))
+        ticker = self.get_exchange().get_ticker(CurrencyPair('KRW', 'ICX'))
         self.assertIsNotNone(ticker)
         logging.info(ticker)
+
+    def test_get_orderbook(self):
+        orderbook = self.get_exchange().get_orderbook(CurrencyPair('KRW', 'ADA'))
+        self.assertIsNotNone(orderbook)
+        logging.info(orderbook)
 
 
 if __name__ == '__main__':

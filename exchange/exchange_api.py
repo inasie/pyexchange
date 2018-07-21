@@ -1,24 +1,25 @@
 import logging
 from exchange.upbit.exchange_upbit import ExchangeUpbit
 from exchange.bithumb.exchange_bithumb import ExchangeBithumb
+from exchange.bitfinex.exchange_bitfinex import ExchangeBitfinex
 
 
 class ExchangeAPI:
-    EXCHANGES = ['Upbit', 'Bithumb']
+    EXCHANGES = ['Upbit', 'Bithumb', 'Bitfinex']
 
     def get_exchanges(self):
         '''
-        지원되는 거래소 리스트
-        :return: 거래소 문자열 리스트
+        Currently supported exchanges
+        :return: exchange name list
         :rtype str[]
         '''
         return self.EXCHANGES
 
     def create_exchange(self, exchange_name):
         '''
-        거래소 객체 생성
-        :param str exchange_name: 거래소 이름
-        :return: 거래소 객체
+        create an Exchange obj
+        :param str exchange_name: an exchange name
+        :return: Exchange object
         :rtype ExchangeBase
         '''
 
@@ -26,6 +27,8 @@ class ExchangeAPI:
             return ExchangeUpbit()
         elif exchange_name.__eq__('Bithumb'):
             return ExchangeBithumb()
+        elif exchange_name.__eq__('Bitfinex'):
+            return ExchangeBitfinex()
         else:
             logging.error('invalid exchange: %s' % exchange_name)
             return NotImplementedError()

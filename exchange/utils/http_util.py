@@ -6,10 +6,15 @@ import logging
 
 class HttpUtil:
     """
-    http 요청 유틸
+    http util
     """
 
     def get(self, url, params=None):
+        '''
+        get request
+        :param str url: url
+        :param set params: parameters
+        '''
         resp = requests.get(url, params=params)
         if resp.status_code != 200:
             logging.error('get(%s) failed(%d)' % (url, resp.status_code))

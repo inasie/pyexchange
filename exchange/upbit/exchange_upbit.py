@@ -1,5 +1,6 @@
 from exchange.errors import *
 from exchange.ticker import Ticker
+from exchange.orderbook import *
 from exchange.currency_pair import CurrencyPair
 from exchange.exchange_base import ExchangeBase
 from exchange.upbit.upbit import Upbit
@@ -7,22 +8,19 @@ from exchange.upbit.upbit import Upbit
 
 class ExchangeUpbit(ExchangeBase):
     """
-    업비트
+    Upbit
     """
     NAME = 'Upbit'
     VERSION = '1.0'
     URL = 'https://docs.upbit.com/v1.0/reference'
 
     def __init__(self):
-        '''
-        생성자
-        '''
         super().__init__(self.NAME, self.VERSION, self.URL)
         self.upbit = Upbit()
 
     def get_currency_pairs(self):
         '''
-        지원되는 암호화폐 쌍 리스트
+        Gets currency list supported by exchange
         :return: supported currency pair list
         :rtype: CurrencyPair[]
         '''
@@ -35,9 +33,9 @@ class ExchangeUpbit(ExchangeBase):
 
     def get_ticker(self, currency_pair):
         '''
-        암호화폐쌍의 Ticker 정보 얻기
-        :param CurrencyPair currency_pair: 암호화폐 쌍
-        :return: ticker 정보
+        Gets last price
+        :param CurrencyPair currency_pair: currency pair
+        :return: ticker
         :rtype: Ticker
         '''
         if currency_pair is None:
@@ -49,3 +47,26 @@ class ExchangeUpbit(ExchangeBase):
         price = ticker[0]['trade_price']
         timestamp = ticker[0]['timestamp']
         return Ticker(currency_pair, price, timestamp)
+
+    def get_orderbook(self, currency_pair):
+        '''
+        Gets orderbook information
+        :param CurrencyPair currency_pair: currency pair
+        :return: orderbook
+        :rtype: Orderbook
+        '''
+        if currency_pair is None:
+            raise InvalidParamException('currency_pair is None')
+        base_currency = currency_pair.base_currency
+        currency = currency_pair.currency
+        market = '%s-%s' % (base_currency, currency)
+        orderbook = self.upbit.get_orderbook([market])
+
+        timestamp = orderbook[0]['timestamp']
+        asks = []
+        bids = []
+        for unit in orderbook[0]['orderbook_units']:
+            asks.append(OrderbookItem(unit['ask_price'], unit['ask_size']))
+            bids.append(OrderbookItem(unit['bid_price'], unit['bid_size']))
+
+        return Orderbook(currency_pair, asks, bids, timestamp)
