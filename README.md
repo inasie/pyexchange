@@ -11,7 +11,6 @@ TODO: OKEx, Binance, Huobi, ...
 |---|---|---|--|
 | get_exchanges | None | str[] | Currently supported exchanges |
 | create_exchange | str | Exchange | create an Exchange obj |
-|   |   |   |   |
 
 ### Exchange
 | API  | Param  | Return | Description |
@@ -19,7 +18,6 @@ TODO: OKEx, Binance, Huobi, ...
 | get_currency_pairs | None | CurrenyPair[] | Gets currency list supported by exchange |
 | get_ticker | CurrencyPair | Ticker | Gets last price |
 | get_orderbook | CurrencyPair | Orderbook | Gets orderbook info |
-|   |   |   |   |
 
 ## Example
 ```python
