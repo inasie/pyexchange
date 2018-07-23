@@ -2,8 +2,8 @@
 Python wrapper of cryptocurrency exchange pubilc APIs
 
 ## Exchanges
-Currently supported - Bithumb, Upbit, Bitfinex <br>
-TODO: OKEx, Binance, Huobi, ...
+Currently supported - Bithumb, Upbit, Bitfinex, Binance <br>
+TODO: OKEx, Huobi, ...
 
 ## API
 ### ExchangeAPI
@@ -24,8 +24,8 @@ TODO: OKEx, Binance, Huobi, ...
 from exchange import CurrencyPair
 from exchange import ExchangeAPI
 
-bitfinex = ExchangeAPI().create_exchange('Bitfinex')
-ticker = bitfinex.get_ticker(CurrencyPair('USD', 'BTC'))
+binance = ExchangeAPI().create_exchange('Binance')
+ticker = binance.get_ticker(CurrencyPair('USD', 'BTC'))
 print(ticker)
 ```
 Please refer unittest for more example codes

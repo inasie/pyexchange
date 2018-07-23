@@ -5,7 +5,7 @@ from exchange.bitfinex.exchange_bitfinex import ExchangeBitfinex
 
 
 class ExchangeAPI:
-    EXCHANGES = ['Upbit', 'Bithumb', 'Bitfinex']
+    EXCHANGES = ['Upbit', 'Bithumb', 'Bitfinex', 'Binance']
 
     def get_exchanges(self):
         '''
@@ -28,6 +28,8 @@ class ExchangeAPI:
         elif exchange_name.__eq__('Bithumb'):
             return ExchangeBithumb()
         elif exchange_name.__eq__('Bitfinex'):
+            return ExchangeBitfinex()
+        elif exchange_name.__eq__('Binance'):
             return ExchangeBitfinex()
         else:
             logging.error('invalid exchange: %s' % exchange_name)
