@@ -150,6 +150,7 @@ class Binance:
         '''
         Symbol price ticker
         Latest price for a symbol or symbols.
+        https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#symbol-price-ticker
         :param str symbol:
         :return: json array (symbol is None), json object (symbol is not None)
         '''
@@ -163,6 +164,7 @@ class Binance:
         '''
         Symbol order book ticker
         Best price/qty on the order book for a symbol or symbols.
+        https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#symbol-order-book-ticker
         :param str symbol:
         :return: json array (symbol is None), json object (symbol is not None)
         '''
