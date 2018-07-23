@@ -12,7 +12,7 @@ class ExchangeBithumb(ExchangeBase):
     Bithumb
     """
     NAME = 'Bithumb'
-    VERSION = '1.0'
+    VERSION = 'Unknown'
     URL = 'https://www.bithumb.com/u1/US127'
 
     def __init__(self):

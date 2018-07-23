@@ -11,7 +11,7 @@ class ExchangeBitfinex(ExchangeBase):
     Bitfinex
     """
     NAME = 'Bitfinex'
-    VERSION = '1.0'
+    VERSION = 'v1'
     URL = 'https://bitfinex.readme.io/v1/reference'
 
     def __init__(self):

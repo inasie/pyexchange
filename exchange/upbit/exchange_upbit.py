@@ -11,7 +11,7 @@ class ExchangeUpbit(ExchangeBase):
     Upbit
     """
     NAME = 'Upbit'
-    VERSION = '1.0'
+    VERSION = 'v1.0'
     URL = 'https://docs.upbit.com/v1.0/reference'
 
     def __init__(self):

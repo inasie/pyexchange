@@ -11,7 +11,7 @@ class ExchangeBianace(ExchangeBase):
     Binance
     """
     NAME = 'Binance'
-    VERSION = '1.0'
+    VERSION = 'v1'
     URL = 'https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md'
 
     def __init__(self):
