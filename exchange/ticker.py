@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+import time
+
+
 class Ticker:
     """
     last traded price
     """
 
-    def __init__(self, currency_pair, price, timestamp):
+    def __init__(self, currency_pair, price, timestamp=None):
         '''
         contructor
         :param CurrencyPair currency_pair: currency pair
@@ -13,7 +16,10 @@ class Ticker:
         '''
         self.currency_pair = currency_pair
         self.price = price
-        self.timestamp = timestamp
+        if timestamp is None:
+            timestamp = int(time.time())
+        else:
+            self.timestamp = timestamp
 
     def __str__(self):
         return 'currency_pair: %s, price: %.2f, timestamp: %ld' % (self.currency_pair, self.price, self.timestamp)

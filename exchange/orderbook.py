@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import time
+
+
 class OrderbookItem:
     """
     an orderbook item
@@ -22,7 +25,7 @@ class Orderbook:
     orderbook information
     """
 
-    def __init__(self, currency_pair, asks, bids, timestamp):
+    def __init__(self, currency_pair, asks, bids, timestamp=None):
         '''
         constructor
         :param CurrencyPair currency_pair: currency pair
@@ -33,7 +36,11 @@ class Orderbook:
         self.currency_pair = currency_pair
         self.asks = asks
         self.bids = bids
-        self.timestamp = timestamp
+
+        if timestamp is None:
+            self.timestamp = int(time.time())
+        else:
+            self.timestamp = timestamp
 
     def __str__(self):
         _str = 'Orderbook(%s)-(%s)\n' % (str(self.timestamp),

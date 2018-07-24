@@ -1,22 +1,23 @@
+import logging
 from exchange.errors import *
 from exchange.ticker import Ticker
 from exchange.orderbook import *
 from exchange.currency_pair import CurrencyPair
 from exchange.exchange_base import ExchangeBase
-from exchange.binance.binance import Binance
+from exchange.okex.okex import OKEx
 
 
-class ExchangeBianace(ExchangeBase):
+class ExchangeOKEx(ExchangeBase):
     """
-    Binance
+    OKEx
     """
-    NAME = 'Binance'
+    NAME = 'OKEx'
     VERSION = 'v1'
-    URL = 'https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md'
+    URL = 'https://github.com/okcoin-okex/API-docs-OKEx.com'
 
     def __init__(self):
         super().__init__(self.NAME, self.VERSION, self.URL)
-        self.binance = Binance()
+        self.okex = OKEx()
 
     def get_currency_pairs(self):
         '''
@@ -24,11 +25,12 @@ class ExchangeBianace(ExchangeBase):
         :return: supported currency pair list
         :rtype: CurrencyPair[]
         '''
+        pairs = self.okex.get_pairs()
         currency_pairs = []
-        exchange_info = self.binance.get_exchange_info()
-        for symbol in exchange_info['symbols']:
-            base_currency = symbol['baseAsset']
-            currency = symbol['symbol'][len(base_currency):]
+        for pair_line in pairs.split('\n')[1:]:
+            pair = pair_line.split(',')[1]
+            base_currency = pair.split('_')[1].upper()
+            currency = pair.split('_')[0].upper()
             currency_pairs.append(CurrencyPair(base_currency, currency))
         return currency_pairs
 
@@ -41,12 +43,12 @@ class ExchangeBianace(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        base_currency = currency_pair.base_currency
-        currency = currency_pair.currency
-        symbol = base_currency + currency
-
-        price = float(self.binance.get_ticker_price(symbol)['price'])
-        return Ticker(currency_pair, price)
+        symbol = currency_pair.currency.lower() + '_' + currency_pair.base_currency.lower()
+        logging.info('symbol: ' + symbol)
+        ticker = self.okex.get_ticker(symbol)
+        timestamp = int(ticker['date'])
+        price = float(ticker['ticker']['last'])
+        return Ticker(currency_pair, price, timestamp)
 
     def get_orderbook(self, currency_pair):
         '''
@@ -57,11 +59,10 @@ class ExchangeBianace(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        base_currency = currency_pair.base_currency
-        currency = currency_pair.currency
-        symbol = base_currency + currency
+        symbol = currency_pair.currency.lower() + '_' + currency_pair.base_currency.lower()
+        orderbook = self.okex.get_depth(symbol)
 
-        orderbook = self.binance.get_orderbook(symbol)
+        # timestamp = orderbook['data']['timestamp']
         asks = []
         for unit in orderbook['asks']:
             price = float(unit[0])

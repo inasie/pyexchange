@@ -2,6 +2,8 @@ import logging
 from exchange.upbit.exchange_upbit import ExchangeUpbit
 from exchange.bithumb.exchange_bithumb import ExchangeBithumb
 from exchange.bitfinex.exchange_bitfinex import ExchangeBitfinex
+from exchange.okex.exchange_okex import ExchangeOKEx
+from exchange.binance.exchange_binance import ExchangeBianace
 
 
 class ExchangeAPI:
@@ -31,6 +33,8 @@ class ExchangeAPI:
             return ExchangeBitfinex()
         elif exchange_name.__eq__('Binance'):
             return ExchangeBitfinex()
+        elif exchange_name.__eq__('OKEx'):
+            return ExchangeOKEx()
         else:
             logging.error('invalid exchange: %s' % exchange_name)
             return NotImplementedError()
