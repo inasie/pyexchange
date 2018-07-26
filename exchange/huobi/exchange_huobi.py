@@ -4,20 +4,20 @@ from exchange.ticker import Ticker
 from exchange.orderbook import *
 from exchange.currency_pair import CurrencyPair
 from exchange.exchange_base import ExchangeBase
-from exchange.okex.okex import OKEx
+from exchange.huobi.huobi import Huobi
 
 
-class ExchangeOKEx(ExchangeBase):
+class ExchangeHuobi(ExchangeBase):
     """
-    OKEx
+    Huobi Pro
     """
-    NAME = 'OKEx'
+    NAME = 'Huobi Pro'
     VERSION = 'v1'
-    URL = 'https://github.com/okcoin-okex/API-docs-OKEx.com'
+    URL = 'https://github.com/huobiapi/API_Docs_en/wiki'
 
     def __init__(self):
         super().__init__(self.NAME, self.VERSION, self.URL)
-        self.okex = OKEx()
+        self._huobi = Huobi()
 
     def get_currency_pairs(self):
         '''
@@ -25,12 +25,12 @@ class ExchangeOKEx(ExchangeBase):
         :return: supported currency pair list
         :rtype: CurrencyPair[]
         '''
-        pairs = self.okex.get_pairs()
         currency_pairs = []
-        for pair_line in pairs.split('\n')[1:]:
-            pair = pair_line.split(',')[1]
-            base_currency = pair.split('_')[1].upper()
-            currency = pair.split('_')[0].upper()
+        symbols = self._huobi.get_symbols()
+
+        for symbol_obj in symbols['data']:
+            base_currency = symbol_obj['quote-currency'].upper()
+            currency = symbol_obj['base-currency'].upper()
             currency_pairs.append(CurrencyPair(base_currency, currency))
         return currency_pairs
 
@@ -43,11 +43,10 @@ class ExchangeOKEx(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        symbol = currency_pair.currency.lower() + '_' + currency_pair.base_currency.lower()
-        logging.info('symbol: ' + symbol)
-        ticker = self.okex.get_ticker(symbol)
-        timestamp = int(ticker['date'])
-        price = float(ticker['ticker']['last'])
+        symbol = currency_pair.currency.lower() + currency_pair.base_currency.lower()
+        detail_merged = self._huobi.get_market_detail_merged(symbol)
+        timestamp = detail_merged['ts']
+        price = detail_merged['tick']['close']
         return Ticker(currency_pair, price, timestamp)
 
     def get_orderbook(self, currency_pair):
@@ -59,20 +58,20 @@ class ExchangeOKEx(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        symbol = currency_pair.currency.lower() + '_' + currency_pair.base_currency.lower()
-        orderbook = self.okex.get_depth(symbol)
+        symbol = currency_pair.currency.lower() + currency_pair.base_currency.lower()
+        depth = self._huobi.get_market_depth(symbol, 'step0')
 
-        # timestamp = orderbook['data']['timestamp']
+        timestamp = depth['ts']
         asks = []
-        for unit in orderbook['asks']:
+        for unit in depth['tick']['asks']:
             price = float(unit[0])
             amount = float(unit[1])
             asks.append(OrderbookItem(price, amount))
 
         bids = []
-        for unit in orderbook['bids']:
+        for unit in depth['tick']['bids']:
             price = float(unit[0])
             amount = float(unit[1])
             bids.append(OrderbookItem(price, amount))
 
-        return Orderbook(currency_pair, asks, bids)
+        return Orderbook(currency_pair, asks, bids, timestamp)
