@@ -27,8 +27,8 @@ class ExchangeBianace(ExchangeBase):
         currency_pairs = []
         exchange_info = self.binance.get_exchange_info()
         for symbol in exchange_info['symbols']:
-            base_currency = symbol['baseAsset']
-            currency = symbol['symbol'][len(base_currency):]
+            currency = symbol['baseAsset']
+            base_currency = symbol['symbol'][len(currency):]
             currency_pairs.append(CurrencyPair(base_currency, currency))
         return currency_pairs
 
@@ -43,7 +43,7 @@ class ExchangeBianace(ExchangeBase):
             raise InvalidParamException('currency_pair is None')
         base_currency = currency_pair.base_currency
         currency = currency_pair.currency
-        symbol = base_currency + currency
+        symbol = currency + base_currency
 
         price = float(self.binance.get_ticker_price(symbol)['price'])
         return Ticker(currency_pair, price)
@@ -59,7 +59,7 @@ class ExchangeBianace(ExchangeBase):
             raise InvalidParamException('currency_pair is None')
         base_currency = currency_pair.base_currency
         currency = currency_pair.currency
-        symbol = base_currency + currency
+        symbol = currency + base_currency
 
         orderbook = self.binance.get_orderbook(symbol)
         asks = []

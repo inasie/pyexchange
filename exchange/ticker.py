@@ -17,7 +17,7 @@ class Ticker:
         self.currency_pair = currency_pair
         self.price = price
         if timestamp is None:
-            timestamp = int(time.time())
+            self.timestamp = int(time.time())
         else:
             self.timestamp = timestamp
 

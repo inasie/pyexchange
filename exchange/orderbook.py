@@ -17,7 +17,7 @@ class OrderbookItem:
         self.amount = amount
 
     def __str__(self):
-        return 'price: %.2f, amount: %.2f' % (self.price, self.amount)
+        return 'price: %.5f, amount: %.5f' % (self.price, self.amount)
 
 
 class Orderbook:

@@ -4,11 +4,11 @@ from exchange import CurrencyPair
 from exchange import ExchangeAPI
 
 
-class ExchangeBinanceTest(unittest.TestCase):
+class ExchangeCoinoneTest(unittest.TestCase):
 
     def get_exchange(self):
         exchange = ExchangeAPI()
-        return exchange.create_exchange('Binance')
+        return exchange.create_exchange('Coinone')
 
     def test_get_currency_pairs(self):
         pairs = self.get_exchange().get_currency_pairs()
@@ -20,12 +20,12 @@ class ExchangeBinanceTest(unittest.TestCase):
             logging.info(pair)
 
     def test_get_ticker(self):
-        ticker = self.get_exchange().get_ticker(CurrencyPair('BTC', 'ETH'))
+        ticker = self.get_exchange().get_ticker(CurrencyPair('KRW', 'BTC'))
         self.assertIsNotNone(ticker)
         logging.info(ticker)
 
     def test_get_orderbook(self):
-        orderbook = self.get_exchange().get_orderbook(CurrencyPair('BTC', 'ETH'))
+        orderbook = self.get_exchange().get_orderbook(CurrencyPair('KRW', 'ETH'))
         self.assertIsNotNone(orderbook)
         logging.info(orderbook)
 
