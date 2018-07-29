@@ -4,11 +4,11 @@ from exchange import CurrencyPair
 from exchange import ExchangeAPI
 
 
-class ExchangeGopaxTest(unittest.TestCase):
+class ExchangeBitflyerTest(unittest.TestCase):
 
     def get_exchange(self):
         exchange = ExchangeAPI()
-        return exchange.create_exchange('Gopax')
+        return exchange.create_exchange('Bitflyer')
 
     def test_get_currency_pairs(self):
         pairs = self.get_exchange().get_currency_pairs()
@@ -20,12 +20,12 @@ class ExchangeGopaxTest(unittest.TestCase):
             logging.info(pair)
 
     def test_get_ticker(self):
-        ticker = self.get_exchange().get_ticker(CurrencyPair('BTC', 'ETH'))
+        ticker = self.get_exchange().get_ticker(CurrencyPair('JPY', 'BTC'))
         self.assertIsNotNone(ticker)
         logging.info(ticker)
 
     def test_get_orderbook(self):
-        orderbook = self.get_exchange().get_orderbook(CurrencyPair('KRW', 'ETH'))
+        orderbook = self.get_exchange().get_orderbook(CurrencyPair('JPY', 'BTC'))
         self.assertIsNotNone(orderbook)
         logging.info(orderbook)
 

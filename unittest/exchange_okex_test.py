@@ -4,7 +4,7 @@ from exchange import CurrencyPair
 from exchange import ExchangeAPI
 
 
-class ExchangeBinanceTest(unittest.TestCase):
+class ExchangeOKExTest(unittest.TestCase):
 
     def get_exchange(self):
         exchange = ExchangeAPI()
