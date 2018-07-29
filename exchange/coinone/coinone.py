@@ -61,7 +61,3 @@ class Coinone():
             'period': period
         }
         return self._http.get(URL, params)
-
-
-c = Coinone()
-print(c.get_trades('btc', 'hour'))

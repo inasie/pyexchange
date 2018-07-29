@@ -8,11 +8,12 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 | Bitfinex  | v1 | https://bitfinex.readme.io/v1/reference |
 | Bithumb  | Unknown | https://www.bithumb.com/u1/US127 |
 | Coinone  | v.1.10 | https://doc.coinone.co.kr |
+| Gopax  | Unknown | https://www.gopax.co.kr/API |
 | Huobi  | v1 | https://github.com/huobiapi/API_Docs_en/wiki |
 | OKEx  | v1 | https://github.com/okcoin-okex/API-docs-OKEx.com |
 | Upbit  | v1.0 | https://docs.upbit.com/v1.0/reference |
 <br>
-TODO: zb, hitbtc, bibox, lbank, bcex, gopax, ...
+TODO: zb, hitbtc, bibox, lbank, bcex, ...
 
 ## API
 ### ExchangeAPI

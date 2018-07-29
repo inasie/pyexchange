@@ -6,11 +6,12 @@ from exchange.bitfinex.exchange_bitfinex import ExchangeBitfinex
 from exchange.okex.exchange_okex import ExchangeOKEx
 from exchange.binance.exchange_binance import ExchangeBianace
 from exchange.huobi.exchange_huobi import ExchangeHuobi
+from exchange.gopax.exchange_gopax import ExchangeGopax
 
 
 class ExchangeAPI:
     EXCHANGES = ['Bithumb', 'Bitfinex', 'Binance',
-                 'Coinone', 'Huobi', 'OKEx', 'Upbit']
+                 'Coinone', 'Gopax', 'Huobi', 'OKEx', 'Upbit']
 
     def get_exchanges(self):
         '''
@@ -28,9 +29,7 @@ class ExchangeAPI:
         :rtype ExchangeBase
         '''
 
-        if exchange_name.__eq__('Upbit'):
-            return ExchangeUpbit()
-        elif exchange_name.__eq__('Bithumb'):
+        if exchange_name.__eq__('Bithumb'):
             return ExchangeBithumb()
         elif exchange_name.__eq__('Bitfinex'):
             return ExchangeBitfinex()
@@ -38,10 +37,14 @@ class ExchangeAPI:
             return ExchangeBianace()
         elif exchange_name.__eq__('Coinone'):
             return ExchangeCoinone()
+        elif exchange_name.__eq__('Gopax'):
+            return ExchangeGopax()
         elif exchange_name.__eq__('Huobi'):
             return ExchangeHuobi()
         elif exchange_name.__eq__('OKEx'):
             return ExchangeOKEx()
+        elif exchange_name.__eq__('Upbit'):
+            return ExchangeUpbit()
         else:
             logging.error('invalid exchange: %s' % exchange_name)
             return NotImplementedError()
