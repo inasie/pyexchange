@@ -11,9 +11,21 @@ class ExchangeBase:
         :param str version: API version
         :param str url: API url
         '''
-        self.name = name
-        self.version = version
-        self.url = url
+        self._name = name
+        self._version = version
+        self._url = url
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def version(self):
+        return self._version
+
+    @property
+    def url(self):
+        return self._url
 
     def get_currency_pairs(self):
         '''

@@ -28,8 +28,8 @@ class ExchangeBitfinex(ExchangeBase):
         symbols = self.bitfinex.get_symbols()
         for symbol in symbols:
             currency = symbol[0:3].upper()
-            base_currency = symbol[3:].upper()
-            currency_pairs.append(CurrencyPair(base_currency, currency))
+            market_currency = symbol[3:].upper()
+            currency_pairs.append(CurrencyPair(market_currency, currency))
         return currency_pairs
 
     def get_ticker(self, currency_pair):
@@ -39,7 +39,7 @@ class ExchangeBitfinex(ExchangeBase):
         :return: ticker
         :rtype: Ticker
         '''
-        symbol = currency_pair.currency + currency_pair.base_currency
+        symbol = currency_pair.currency + currency_pair.market_currency
         ticker = self.bitfinex.get_ticker(symbol)
         timestamp = int(float(ticker['timestamp']))
         price = float(ticker['last_price'])
@@ -52,7 +52,7 @@ class ExchangeBitfinex(ExchangeBase):
         :return: orderbook
         :rtype: Orderbook
         '''
-        symbol = currency_pair.currency + currency_pair.base_currency
+        symbol = currency_pair.currency + currency_pair.market_currency
         orderbook = self.bitfinex.get_orderbook(symbol)
 
         timestamp = 0

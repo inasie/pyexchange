@@ -44,8 +44,8 @@ class ExchangeBithumb(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        if currency_pair.base_currency != 'KRW':
-            raise InvalidParamException('invalid base_currency')
+        if currency_pair.market_currency != 'KRW':
+            raise InvalidParamException('invalid market_currency')
         ticker = self.bithumb.ticker(currency_pair.currency)
         if int(ticker['status']) != 0:
             raise Exception('ticker() failed(%s)' % ticker['status'])
@@ -62,8 +62,8 @@ class ExchangeBithumb(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        if currency_pair.base_currency != 'KRW':
-            raise InvalidParamException('invalid base_currency')
+        if currency_pair.market_currency != 'KRW':
+            raise InvalidParamException('invalid market_currency')
         orderbook = self.bithumb.orderbook(currency_pair.currency)
         if int(orderbook['status']) != 0:
             raise Exception('orderbook() failed(%s)' % orderbook['status'])

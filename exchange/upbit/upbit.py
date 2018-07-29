@@ -12,7 +12,7 @@ class Upbit:
     """
 
     def __init__(self):
-        self.http = HttpUtil()
+        self._http = HttpUtil()
 
     def get_market_all(self):
         '''
@@ -22,7 +22,7 @@ class Upbit:
         :return: json array
         '''
         URL = 'https://api.upbit.com/v1/market/all'
-        return self.http.get(URL)
+        return self._http.get(URL)
 
     def get_minutes_candles(self, unit, market, to=None, count=None):
         '''
@@ -43,7 +43,7 @@ class Upbit:
             params['to'] = to
         if count is not None:
             params['count'] = count
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_days_candles(self, market, to=None, count=None):
         '''
@@ -60,7 +60,7 @@ class Upbit:
             params['to'] = to
         if count is not None:
             params['count'] = count
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_weeks_candles(self, market, to=None, count=None):
         '''
@@ -77,7 +77,7 @@ class Upbit:
             params['to'] = to
         if count is not None:
             params['count'] = count
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_months_candles(self, market, to=None, count=None):
         '''
@@ -94,7 +94,7 @@ class Upbit:
             params['to'] = to
         if count is not None:
             params['count'] = count
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_trades_ticks(self, market, to=None, count=None, cursor=None):
         '''
@@ -114,7 +114,7 @@ class Upbit:
             params['count'] = count
         if cursor is not None:
             params['cursor'] = cursor
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_ticker(self, markets):
         '''
@@ -136,7 +136,7 @@ class Upbit:
         for market in markets[1:]:
             markets_data += ',%s' % market
         params = {'markets': markets_data}
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_orderbook(self, markets):
         '''
@@ -157,4 +157,4 @@ class Upbit:
         for market in markets[1:]:
             markets_data += ',%s' % market
         params = {'markets': markets_data}
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)

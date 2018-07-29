@@ -43,8 +43,8 @@ class ExchangeCoinone(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        if currency_pair.base_currency != 'KRW':
-            raise InvalidParamException('invalid base_currency')
+        if currency_pair.market_currency != 'KRW':
+            raise InvalidParamException('invalid market_currency')
         ticker = self._coinone.get_ticker(currency_pair.currency)
         price = float(ticker['last'])
         timestamp = int(ticker['timestamp'])
@@ -59,8 +59,8 @@ class ExchangeCoinone(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        if currency_pair.base_currency != 'KRW':
-            raise InvalidParamException('invalid base_currency')
+        if currency_pair.market_currency != 'KRW':
+            raise InvalidParamException('invalid market_currency')
         orderbook = self._coinone.get_orderbook(currency_pair.currency)
 
         timestamp = int(orderbook['timestamp'])

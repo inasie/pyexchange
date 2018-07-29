@@ -12,7 +12,7 @@ class Bitfinex():
     """
 
     def __init__(self):
-        self.http = HttpUtil()
+        self._http = HttpUtil()
 
     def get_ticker(self, symbol):
         '''
@@ -23,7 +23,7 @@ class Bitfinex():
         :return: json object
         '''
         URL = 'https://api.bitfinex.com/v1/ticker/'
-        return self.http.get(URL + symbol)
+        return self._http.get(URL + symbol)
 
     def get_stats(self, symbol):
         '''
@@ -34,7 +34,7 @@ class Bitfinex():
         :return: json array
         '''
         URL = 'https://api.bitfinex.com/v1/stats/'
-        return self.http.get(URL + symbol)
+        return self._http.get(URL + symbol)
 
     # https://bitfinex.readme.io/v1/reference#rest-public-fundingbook
     def get_fundingbook(self, currency='USD', limit_bids=None, limit_asks=None):
@@ -53,7 +53,7 @@ class Bitfinex():
             params['limit_asks'] = limit_asks
         if limit_bids is not None:
             params['limit_bids'] = limit_bids
-        return self.http.get(URL + currency, params)
+        return self._http.get(URL + currency, params)
 
     # https://bitfinex.readme.io/v1/reference#rest-public-orderbook
     def get_orderbook(self, symbol, limit_bids=None, limit_asks=None, group=None):
@@ -75,7 +75,7 @@ class Bitfinex():
             params['limit_asks'] = limit_asks
         if group is not None:
             params['group'] = group
-        return self.http.get(URL + symbol, params)
+        return self._http.get(URL + symbol, params)
 
     def get_trades(self, symbol, timestamp=None, limit_trades=None):
         '''
@@ -93,7 +93,7 @@ class Bitfinex():
             params['timestamp'] = timestamp
         if limit_trades is not None:
             params['limit_trades'] = limit_trades
-        return self.http.get(URL + symbol, params)
+        return self._http.get(URL + symbol, params)
 
     def get_lends(self, currency='USD', timestamp=None, limit_lends=None):
         '''
@@ -111,7 +111,7 @@ class Bitfinex():
             params['timestamp'] = timestamp
         if limit_lends is not None:
             params['limit_lends'] = limit_lends
-        return self.http.get(URL + currency, params)
+        return self._http.get(URL + currency, params)
 
     def get_symbols(self):
         '''
@@ -121,7 +121,7 @@ class Bitfinex():
         :return: json array
         '''
         URL = 'https://api.bitfinex.com/v1/symbols'
-        return self.http.get(URL)
+        return self._http.get(URL)
 
     def get_symbol_details(self):
         '''
@@ -131,4 +131,4 @@ class Bitfinex():
         :return: json array
         '''
         URL = 'https://api.bitfinex.com/v1/symbols_details'
-        return self.http.get(URL)
+        return self._http.get(URL)

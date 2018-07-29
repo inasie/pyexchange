@@ -12,11 +12,11 @@ class OKEx():
     """
 
     def __init__(self):
-        self.http = HttpUtil()
+        self._http = HttpUtil()
 
     def get_pairs(self):
         URL = 'https://raw.githubusercontent.com/okcoin-okex/API-docs-OKEx.com/master/%E5%B8%81%E5%AF%B9%E7%B2%BE%E5%BA%A6(pairs_increment).csv'
-        return self.http.get_raw(URL)
+        return self._http.get_raw(URL)
 
     def get_ticker(self, symbol, contract_type=None):
         '''
@@ -32,7 +32,7 @@ class OKEx():
         }
         if contract_type is not None:
             params['contract_type'] = contract_type
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_depth(self, symbol, size=None):
         '''
@@ -48,7 +48,7 @@ class OKEx():
         }
         if size is not None:
             params['size'] = size
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_trades(self, symbol, since=None):
         '''
@@ -62,7 +62,7 @@ class OKEx():
         params = {'symbol': symbol}
         if since is not None:
             params['since'] = since
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_kline(self, symbol, type, size=None, since=None):
         '''
@@ -82,4 +82,4 @@ class OKEx():
             params['size'] = size
         if since is not None:
             params['since'] = since
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)

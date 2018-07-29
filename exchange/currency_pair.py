@@ -4,13 +4,21 @@ class CurrencyPair:
     Currency pair
     """
 
-    def __init__(self, base_currency, currency):
+    def __init__(self, market_currency, currency):
         '''
-        :param str base_currency: base currency
+        :param str market_currency: base currency
         :param str currency: target currency
         '''
-        self.base_currency = base_currency
-        self.currency = currency
+        self._market_currency = market_currency
+        self._currency = currency
 
     def __str__(self):
-        return 'base_currency: %s, currency: %s' % (self.base_currency, self.currency)
+        return 'market_currency: %s, currency: %s' % (self._market_currency, self._currency)
+
+    @property
+    def market_currency(self):
+        return self._market_currency
+
+    @property
+    def currency(self):
+        return self._currency

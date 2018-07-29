@@ -29,9 +29,9 @@ class ExchangeOKEx(ExchangeBase):
         currency_pairs = []
         for pair_line in pairs.split('\n')[1:]:
             pair = pair_line.split(',')[1]
-            base_currency = pair.split('_')[1].upper()
+            market_currency = pair.split('_')[1].upper()
             currency = pair.split('_')[0].upper()
-            currency_pairs.append(CurrencyPair(base_currency, currency))
+            currency_pairs.append(CurrencyPair(market_currency, currency))
         return currency_pairs
 
     def get_ticker(self, currency_pair):
@@ -43,7 +43,7 @@ class ExchangeOKEx(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        symbol = currency_pair.currency.lower() + '_' + currency_pair.base_currency.lower()
+        symbol = currency_pair.currency.lower() + '_' + currency_pair.market_currency.lower()
         logging.info('symbol: ' + symbol)
         ticker = self.okex.get_ticker(symbol)
         timestamp = int(ticker['date'])
@@ -59,7 +59,7 @@ class ExchangeOKEx(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        symbol = currency_pair.currency.lower() + '_' + currency_pair.base_currency.lower()
+        symbol = currency_pair.currency.lower() + '_' + currency_pair.market_currency.lower()
         orderbook = self.okex.get_depth(symbol)
 
         # timestamp = orderbook['data']['timestamp']

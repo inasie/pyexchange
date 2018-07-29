@@ -11,7 +11,7 @@ class Bithumb():
     """
 
     def __init__(self):
-        self.http = HttpUtil()
+        self._http = HttpUtil()
 
     def ticker(self, currency):
         '''
@@ -21,7 +21,7 @@ class Bithumb():
         :return: json object
         '''
         URL = 'https://api.bithumb.com/public/ticker/'
-        return self.http.get(URL + currency)
+        return self._http.get(URL + currency)
 
     def orderbook(self, currency, group_orders=1, count=5):
         '''
@@ -42,7 +42,7 @@ class Bithumb():
             'group_orders': group_orders,
             'count': count
         }
-        return self.http.get(URL + currency, params=params)
+        return self._http.get(URL + currency, params=params)
 
     def transaction_history(self, currency, cont_no=None, count=20):
         '''
@@ -59,4 +59,4 @@ class Bithumb():
         params = {'count': count}
         if cont_no != 0:
             params['cont_no'] = cont_no
-        return self.http.get(URL + currency, params=params)
+        return self._http.get(URL + currency, params=params)

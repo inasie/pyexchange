@@ -14,12 +14,24 @@ class Ticker:
         :param float price: price
         :param long timestamp: updated time
         '''
-        self.currency_pair = currency_pair
-        self.price = price
+        self._currency_pair = currency_pair
+        self._price = price
         if timestamp is None:
-            self.timestamp = int(time.time())
+            self._timestamp = int(time.time())
         else:
-            self.timestamp = timestamp
+            self._timestamp = timestamp
 
     def __str__(self):
         return 'currency_pair: %s, price: %.2f, timestamp: %ld' % (self.currency_pair, self.price, self.timestamp)
+
+    @property
+    def currency_pair(self):
+        return self._currency_pair
+
+    @property
+    def price(self):
+        return self._price
+
+    @property
+    def timestamp(self):
+        return self._timestamp

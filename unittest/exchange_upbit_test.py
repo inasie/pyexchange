@@ -15,7 +15,7 @@ class ExchangeUpbitTest(unittest.TestCase):
         self.assertIsNotNone(pairs)
         self.assertNotEqual(len(pairs), 0)
         for pair in pairs:
-            self.assertIsNotNone(pair.base_currency)
+            self.assertIsNotNone(pair.market_currency)
             self.assertIsNotNone(pair.currency)
             logging.info(pair)
 

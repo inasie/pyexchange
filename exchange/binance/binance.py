@@ -12,7 +12,7 @@ class Binance:
     """
 
     def __init__(self):
-        self.http = HttpUtil()
+        self._http = HttpUtil()
 
     def get_ping(self):
         '''
@@ -22,7 +22,7 @@ class Binance:
         :return: json object
         '''
         URL = 'https://api.binance.com/api/v1/ping'
-        return self.http.get(URL)
+        return self._http.get(URL)
 
     def get_time(self):
         '''
@@ -32,7 +32,7 @@ class Binance:
         :return: json object
         '''
         URL = 'https://api.binance.com/api/v1/time'
-        return self.http.get(URL)
+        return self._http.get(URL)
 
     def get_exchange_info(self):
         '''
@@ -42,7 +42,7 @@ class Binance:
         :return: json object
         '''
         URL = 'https://api.binance.com/api/v1/exchangeInfo'
-        return self.http.get(URL)
+        return self._http.get(URL)
 
     def get_orderbook(self, symbol, limit=None):
         '''
@@ -60,7 +60,7 @@ class Binance:
         params = {'symbol': symbol}
         if limit is not None:
             params['limit'] = limit
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_trades(self, symbol, limit=None):
         '''
@@ -75,7 +75,7 @@ class Binance:
         params = {'symbol': symbol}
         if limit is not None:
             params['limit'] = limit
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_agg_trades(self, symbol, from_id=None, start_time=None, end_time=None, limit=None):
         '''
@@ -99,7 +99,7 @@ class Binance:
             params['endTime'] = end_time
         if limit is not None:
             params['limit'] = limit
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_klines(self, symbol, interval, start_time=None, end_time=None, limit=None):
         '''
@@ -130,7 +130,7 @@ class Binance:
             params['endTime'] = end_time
         if limit is not None:
             params['limit'] = limit
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_24h_ticker(self, symbol=None):
         '''
@@ -144,7 +144,7 @@ class Binance:
         params = {}
         if symbol is not None:
             params['symbol'] = symbol
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_ticker_price(self, symbol=None):
         '''
@@ -158,7 +158,7 @@ class Binance:
         params = {}
         if symbol is not None:
             params['symbol'] = symbol
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)
 
     def get_ticker_book(self, symbol=None):
         '''
@@ -172,4 +172,4 @@ class Binance:
         params = {}
         if symbol is not None:
             params['symbol'] = symbol
-        return self.http.get(URL, params=params)
+        return self._http.get(URL, params=params)

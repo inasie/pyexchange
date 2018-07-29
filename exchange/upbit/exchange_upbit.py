@@ -40,9 +40,9 @@ class ExchangeUpbit(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        base_currency = currency_pair.base_currency
+        market_currency = currency_pair.market_currency
         currency = currency_pair.currency
-        ticker = self.upbit.get_ticker(['%s-%s' % (base_currency, currency)])
+        ticker = self.upbit.get_ticker(['%s-%s' % (market_currency, currency)])
 
         price = ticker[0]['trade_price']
         timestamp = ticker[0]['timestamp']
@@ -57,9 +57,9 @@ class ExchangeUpbit(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        base_currency = currency_pair.base_currency
+        market_currency = currency_pair.market_currency
         currency = currency_pair.currency
-        market = '%s-%s' % (base_currency, currency)
+        market = '%s-%s' % (market_currency, currency)
         orderbook = self.upbit.get_orderbook([market])
 
         timestamp = orderbook[0]['timestamp']

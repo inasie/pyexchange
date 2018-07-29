@@ -29,9 +29,9 @@ class ExchangeHuobi(ExchangeBase):
         symbols = self._huobi.get_symbols()
 
         for symbol_obj in symbols['data']:
-            base_currency = symbol_obj['quote-currency'].upper()
+            market_currency = symbol_obj['quote-currency'].upper()
             currency = symbol_obj['base-currency'].upper()
-            currency_pairs.append(CurrencyPair(base_currency, currency))
+            currency_pairs.append(CurrencyPair(market_currency, currency))
         return currency_pairs
 
     def get_ticker(self, currency_pair):
@@ -43,7 +43,7 @@ class ExchangeHuobi(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        symbol = currency_pair.currency.lower() + currency_pair.base_currency.lower()
+        symbol = currency_pair.currency.lower() + currency_pair.market_currency.lower()
         detail_merged = self._huobi.get_market_detail_merged(symbol)
         timestamp = detail_merged['ts']
         price = detail_merged['tick']['close']
@@ -58,7 +58,7 @@ class ExchangeHuobi(ExchangeBase):
         '''
         if currency_pair is None:
             raise InvalidParamException('currency_pair is None')
-        symbol = currency_pair.currency.lower() + currency_pair.base_currency.lower()
+        symbol = currency_pair.currency.lower() + currency_pair.market_currency.lower()
         depth = self._huobi.get_market_depth(symbol, 'step0')
 
         timestamp = depth['ts']
