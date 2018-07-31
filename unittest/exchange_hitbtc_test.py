@@ -4,11 +4,11 @@ from exchange import CurrencyPair
 from exchange import ExchangeAPI
 
 
-class ExchangeZBTest(unittest.TestCase):
+class ExchangeHitBTCTest(unittest.TestCase):
 
     def get_exchange(self):
         exchange = ExchangeAPI()
-        return exchange.create_exchange('ZB')
+        return exchange.create_exchange('HitBTC')
 
     def test_get_currency_pairs(self):
         pairs = self.get_exchange().get_currency_pairs()
@@ -20,12 +20,12 @@ class ExchangeZBTest(unittest.TestCase):
             logging.info(pair)
 
     def test_get_ticker(self):
-        ticker = self.get_exchange().get_ticker(CurrencyPair('USDT', 'BTC'))
+        ticker = self.get_exchange().get_ticker(CurrencyPair('USD', 'BTC'))
         self.assertIsNotNone(ticker)
         logging.info(ticker)
 
     def test_get_orderbook(self):
-        orderbook = self.get_exchange().get_orderbook(CurrencyPair('USDT', 'BTC'))
+        orderbook = self.get_exchange().get_orderbook(CurrencyPair('USD', 'BTC'))
         self.assertIsNotNone(orderbook)
         logging.info(orderbook)
 
