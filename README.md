@@ -8,6 +8,7 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 | Binance  | v1 | https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md |
 | Bitfinex  | v1 | https://bitfinex.readme.io/v1/reference |
 | Bithumb  | Unknown | https://www.bithumb.com/u1/US127 |
+| Coinbase Pro  | Unknown | https://docs.pro.coinbase.com |
 | Coinone  | v.1.10 | https://doc.coinone.co.kr |
 | Gopax  | Unknown | https://www.gopax.co.kr/API |
 | HitBTC  | 2 | https://api.hitbtc.com |

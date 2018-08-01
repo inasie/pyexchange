@@ -2,6 +2,7 @@ import logging
 from exchange.upbit.exchange_upbit import ExchangeUpbit
 from exchange.bitflyer.exchange_bitflyer import ExchangeBitflyer
 from exchange.bithumb.exchange_bithumb import ExchangeBithumb
+from exchange.coinbase.exchange_coinbase_pro import ExchangeCoinbasePro
 from exchange.coinone.exchange_coinone import ExchangeCoinone
 from exchange.bitfinex.exchange_bitfinex import ExchangeBitfinex
 from exchange.okex.exchange_okex import ExchangeOKEx
@@ -13,8 +14,8 @@ from exchange.zb.exchange_zb import ExchangeZB
 
 
 class ExchangeAPI:
-    EXCHANGES = ['Bitflyer', 'Bithumb', 'Bitfinex', 'Binance', 'Coinone',
-                 'Gopax', 'HitBTC', 'Huobi', 'OKEx', 'Upbit', 'ZB']
+    EXCHANGES = ['Bitflyer', 'Bithumb', 'Bitfinex', 'Binance', 'CoinbasePro'
+                 'Coinone', 'Gopax', 'HitBTC', 'Huobi', 'OKEx', 'Upbit', 'ZB']
 
     def get_exchanges(self):
         '''
@@ -40,6 +41,8 @@ class ExchangeAPI:
             return ExchangeBitfinex()
         elif exchange_name.__eq__('Binance'):
             return ExchangeBianace()
+        elif exchange_name.__eq__('CoinbasePro'):
+            return ExchangeCoinbasePro()
         elif exchange_name.__eq__('Coinone'):
             return ExchangeCoinone()
         elif exchange_name.__eq__('Gopax'):
