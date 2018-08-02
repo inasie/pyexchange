@@ -72,6 +72,6 @@ class ExchangeBianace(ExchangeBase):
         for unit in orderbook['bids']:
             price = float(unit[0])
             amount = float(unit[1])
-            asks.append(OrderbookItem(price, amount))
+            bids.append(OrderbookItem(price, amount))
 
         return Orderbook(currency_pair, asks, bids)

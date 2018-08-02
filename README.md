@@ -40,7 +40,33 @@ from exchange import CurrencyPair
 from exchange import ExchangeAPI
 
 binance = ExchangeAPI().create_exchange('Binance')
-ticker = binance.get_ticker(CurrencyPair('USD', 'BTC'))
-print(ticker)
-```
+for pair in binance.get_currency_pairs():
+    print(pair)
+# market_currency: BTC, currency: ETH
+# market_currency: BTC, currency: LTC
+# market_currency: BTC, currency: BNB
+# market_currency: BTC, currency: NEO
+# market_currency: ETH, currency: QTUM
+# ...
+
+print(binance.get_ticker(CurrencyPair('USDR', 'BTC')))
+# currency_pair: market_currency: USDT, currency: BTC, price: 7505.27, timestamp: 1533219056
+
+print(binance.get_orderbook(CurrencyPair('USDT', 'BTC')))
+# Orderbook(1533219081)-(market_currency: USDT, currency: BTC)
+# Bids -
+#         price: 7504.00000, amount: 0.14538
+#         price: 7502.00000, amount: 0.23498
+#         price: 7501.00000, amount: 0.62473
+#         price: 7500.38000, amount: 0.05693
+#         price: 7500.06000, amount: 0.34357
+# ...
+# Bids -
+#         price: 7504.00000, amount: 0.14538
+#         price: 7502.00000, amount: 0.23498
+#         price: 7501.00000, amount: 0.62473
+#         price: 7500.38000, amount: 0.05693
+#         price: 7500.06000, amount: 0.34357
+# '''
+
 Please refer unittest for more example codes
