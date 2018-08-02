@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='pyexchange',
-    version='0.3.12',
+    version='0.3.13',
     description='Python wrapper of cryptocurrency exchange pubilc APIs',
     url='https://github.com/inasie/pyexchange',
     author='inasie',

@@ -13,9 +13,10 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 | Gopax  | Unknown | https://www.gopax.co.kr/API |
 | HitBTC  | 2 | https://api.hitbtc.com |
 | Huobi  | v1 | https://github.com/huobiapi/API_Docs_en/wiki |
+| LBank  | v1 | https://github.com/LBank-exchange/lbank-official-api-docs |
 | OKEx  | v1 | https://github.com/okcoin-okex/API-docs-OKEx.com |
 | Upbit  | v1.0 | https://docs.upbit.com/v1.0/reference |
-| ZB  | v1 | https://www.zb.com/i/developer/restApi |
+| ZB | v1 | https://www.zb.com/i/developer/restApi |
 
 ## API
 ### ExchangeAPI
