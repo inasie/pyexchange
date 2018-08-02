@@ -13,12 +13,13 @@ from exchange.gopax.exchange_gopax import ExchangeGopax
 from exchange.zb.exchange_zb import ExchangeZB
 from exchange.lbank.exchange_lbank import ExchangeLBank
 from exchange.bitforex.exchange_bitforex import ExchangeBitforex
+from exchange.coinex.exchange_coinex import ExchangeCoinEx
 
 
 class ExchangeAPI:
     EXCHANGES = ['Bitflyer', 'Bithumb', 'Bitfinex', 'Binance', 'CoinbasePro'
                  'Coinone', 'Gopax', 'HitBTC', 'Huobi', 'OKEx', 'Upbit', 'ZB',
-                 'LBank', 'Bitforex']
+                 'LBank', 'Bitforex', 'CoinEx']
 
     def get_exchanges(self):
         '''
@@ -48,6 +49,8 @@ class ExchangeAPI:
             return ExchangeBianace()
         elif exchange_name.__eq__('CoinbasePro'):
             return ExchangeCoinbasePro()
+        elif exchange_name.__eq__('CoinEx'):
+            return ExchangeCoinEx()
         elif exchange_name.__eq__('Coinone'):
             return ExchangeCoinone()
         elif exchange_name.__eq__('Gopax'):
