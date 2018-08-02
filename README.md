@@ -5,8 +5,9 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 | Name | Version | URL |
 |---|---|---|
 | Bitflyer  | v1 | https://lightning.bitflyer.com/docs?lang=en |
-| Binance  | v1 | https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md |
+| Binance  | v1 | https://github.com/binance-exchange/binance-official-api-docs |
 | Bitfinex  | v1 | https://bitfinex.readme.io/v1/reference |
+| Bitforex  | v1 | https://github.com/bitforexapi/API_Doc_en |
 | Bithumb  | Unknown | https://www.bithumb.com/u1/US127 |
 | Coinbase Pro  | Unknown | https://docs.pro.coinbase.com |
 | Coinone  | v.1.10 | https://doc.coinone.co.kr |
