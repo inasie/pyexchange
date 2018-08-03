@@ -51,7 +51,7 @@ for pair in binance.get_currency_pairs():
 # market_currency: ETH, currency: QTUM
 # ...
 
-print(binance.get_ticker(CurrencyPair('USDR', 'BTC')))
+print(binance.get_ticker(CurrencyPair('USDT', 'BTC')))
 # currency_pair: market_currency: USDT, currency: BTC, price: 7505.27, timestamp: 1533219056
 
 print(binance.get_orderbook(CurrencyPair('USDT', 'BTC')))
