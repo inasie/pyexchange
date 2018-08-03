@@ -10,6 +10,7 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 | Bitforex  | v1 | https://github.com/bitforexapi/API_Doc_en |
 | Bithumb  | Unknown | https://www.bithumb.com/u1/US127 |
 | Coinbase Pro  | Unknown | https://docs.pro.coinbase.com |
+| Coinbene | v1 | https://github.com/Coinbene/API-Documents/wiki/0.0.0-Coinbene-API-documents |
 | CoinEx | v1 | https://github.com/coinexcom/coinex_exchange_api/wiki |
 | Coinone  | v.1.10 | https://doc.coinone.co.kr |
 | Gopax  | Unknown | https://www.gopax.co.kr/API |
