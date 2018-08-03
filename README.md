@@ -4,6 +4,7 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 ## Supported exchanges
 | Name | Version | URL |
 |---|---|---|
+| Bibox  | v1 | https://github.com/Biboxcom/api_reference/wiki/home_en |
 | Bitflyer  | v1 | https://lightning.bitflyer.com/docs?lang=en |
 | Binance  | v1 | https://github.com/binance-exchange/binance-official-api-docs |
 | Bitfinex  | v1 | https://bitfinex.readme.io/v1/reference |
