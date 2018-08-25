@@ -36,6 +36,16 @@ Python wrapper of cryptocurrency exchange pubilc APIs
 | get_ticker | CurrencyPair | Ticker | Gets last price |
 | get_orderbook | CurrencyPair | Orderbook | Gets orderbook |
 
+## Build & Install
+```bash
+python3 setup.py build
+python3 setup.py install
+
+or 
+
+pip3 install -e ./
+```
+
 ## Example
 ```python
 from exchange import CurrencyPair
